@@ -32,7 +32,7 @@ public class StockService {
 
   public boolean stockAlreadyAdded(String stockSymbol, Account account) {
     // Try to find the stock for the given user
-    Stock stock = stockRepository.findFirstByTickerAndUserEmail(stockSymbol, account.getEmail());
+    Stock stock = stockRepository.findFirstByTickerAndUserEmailAllIgnoreCase(stockSymbol, account.getEmail());
 
     // Return true if the stock exists
     return (stock != null);

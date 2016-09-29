@@ -1,4 +1,4 @@
-<#import "layouts/main.ftl" as u>
+<#import "../layouts/main.ftl" as u>
 
 <@u.page>
 
@@ -29,22 +29,36 @@
 <#if stock??>
 
 <div class="well well-lg">
-  <strong> Symbol: </strong> ${stock.symbol}
-  <strong> Name: </strong> ${stock.name}
-  <strong> Currency: </strong> ${stock.currency}
-  <strong> Price: </strong> ${stock.price}
+  <strong> Name: </strong> ${stock.name} <br/>
+  <strong> Symbol: </strong> ${stock.symbol} <br/>
+  <strong> Currency: </strong> ${stock.currency} <br/>
+  <strong> Previous Close: </strong> ${stock.previousClose} <br/>
+  <strong> Current Price: </strong> ${stock.price} <br/>
+
+  <#if stock.percentage gte 0 >
+    <div class="profit">
+      <strong> Percentage: </strong> ${stock.percentage} %
+    </div>
+  <#else>
+    <div class="loss">
+      <strong> Percentage: </strong> ${stock.percentage} %
+    </div>
+  </#if>
 
   <#if stock_already_added??>
-    <p class="medium-margin-top">
+    <p>
       <h4><span class="label label-danger"> You already added this stock </span></h4>
     </p>
   <#else >
     <form name="stock" action="addStock" method="get">
       <input type="hidden" name="stockSymbol" value= ${stock.symbol}>
-      <input type="submit" value="Add Stock" class="btn btn-success medium-margin-top">
+      <input type="submit" value="Add Stock" class="btn btn-success">
     </form>
   </#if>
 </div>
 </#if>
+
+<#--Show the list of stocks the user is currently following -->
+
 
 </@u.page>

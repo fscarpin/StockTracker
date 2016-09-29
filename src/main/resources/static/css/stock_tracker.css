@@ -23,7 +23,7 @@
 }
 
 .large-padding-bottom {
-  padding-bottom: 2em !important;
+  padding-bottom: 9em !important;
 }
 
 .no-padding-right {
@@ -34,4 +34,12 @@
 /* hover means when the mouse is over it */
 .nav-link:hover {
   text-decoration: none;
+}
+
+.profit {
+  color: green;
+}
+
+.loss {
+  color: red;
 }

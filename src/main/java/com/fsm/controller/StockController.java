@@ -26,7 +26,7 @@ public class StockController {
   public String myStocks() {
 
     // Go to the stocks page
-    return "stocks";
+    return "stock/stocks";
   }
 
   @RequestMapping("/findStock")
@@ -49,7 +49,7 @@ public class StockController {
     }
 
     // Go to stocks page
-    return "stocks";
+    return "stock/stocks";
   }
 
   @RequestMapping("/addStock")
@@ -68,7 +68,7 @@ public class StockController {
     }
 
     // Go to stocks page
-    return "stocks";
+    return "stock/stocks";
   }
 
 }

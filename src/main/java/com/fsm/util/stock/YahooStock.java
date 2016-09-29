@@ -108,4 +108,16 @@ public class YahooStock {
   public String getName(){
     return this.name;
   }
+
+  public double getPercentage() {
+    double current = getPrice();
+    double previousClose = getPreviousClose();
+
+    double diff = current - previousClose;
+
+    if (current == 0)
+      return Double.NaN;
+    else
+      return diff * 100 / current;
+  }
 }
