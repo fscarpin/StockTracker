@@ -1,5 +1,6 @@
 package com.fsm.controller;
 
+import com.fsm.domain.Stock;
 import com.fsm.service.StockService;
 import com.fsm.util.AccountUtil;
 import com.fsm.util.stock.YahooStock;
@@ -57,7 +58,7 @@ public class StockController {
   }
 
   @RequestMapping("/addStock")
-  public ModelAndView addStock(@RequestParam("stockSymbol") String stockSymbol, Model model, HttpServletRequest req) {
+  public String addStock(@RequestParam("stockSymbol") String stockSymbol, Model model, HttpServletRequest req) {
 
     Account account = AccountUtil.getUserAccount(req);
 
@@ -72,7 +73,26 @@ public class StockController {
     }
 
     // Redirect to the main page
-    return new ModelAndView("redirect:/");
+    return "redirect:/";
+  }
+
+  @RequestMapping("/deleteStock")
+  public String deleteStock(@RequestParam("stockId") String stockId, Model model, HttpServletRequest req) {
+
+    Account account = AccountUtil.getUserAccount(req);
+
+    // Make sure the stock belongs to the logged in user
+    if (!stockService.stockBelongsToUser(stockId, account)) {
+      model.addAttribute("error", "You are not allowed to delete this stock");
+    }
+    // Delete the given stock and show a successfull message
+    else {
+      stockService.deleteStock(stockId);
+      model.addAttribute("success", "Stock has been removed from your portfolio");
+    }
+
+    // Redirect to the main page
+    return "redirect:/";
   }
 
 }

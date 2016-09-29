@@ -22,10 +22,10 @@
 
         <#if account??>
           <td>
-            <form name="stock" action="deleteStock" method="post">
-              <input type="hidden" name="stockId" value="${userStock.id}"
-              <input type="submit" value="Remove Stock" class="btn btn-danger">
-            </form>
+            <a data-confirm="Are you sure you want to remove ${userStock.name} from your portfolio?"
+               class="btn btn-danger btn-sm" rel="nofollow" data-method="post" href="/deleteStock?stockId=${userStock.id}">
+              Delete
+            </a>
           </td>
         </#if>
       </tr>

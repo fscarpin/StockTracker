@@ -37,4 +37,18 @@ public class StockService {
     // Return true if the stock exists
     return (stock != null);
   }
+
+  public Stock getStock(String id) {
+    return stockRepository.findOne(Long.parseLong(id));
+  }
+
+  public boolean stockBelongsToUser(String id, Account account) {
+    Stock stock = getStock(id);
+
+    return stock.getUserEmail().equalsIgnoreCase(account.getEmail());
+  }
+
+  public void deleteStock(String id) {
+    stockRepository.delete(Long.parseLong(id));
+  }
 }
