@@ -11,6 +11,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 @Controller
 public class StockController {
@@ -53,7 +57,7 @@ public class StockController {
   }
 
   @RequestMapping("/addStock")
-  public String addStock(@RequestParam("stockSymbol") String stockSymbol, Model model, HttpServletRequest req) {
+  public ModelAndView addStock(@RequestParam("stockSymbol") String stockSymbol, Model model, HttpServletRequest req) {
 
     Account account = AccountUtil.getUserAccount(req);
 
@@ -67,8 +71,8 @@ public class StockController {
       model.addAttribute("success", "Stock " + stockSymbol + " has been successfully added");
     }
 
-    // Go to stocks page
-    return "stock/stocks";
+    // Redirect to the main page
+    return new ModelAndView("redirect:/");
   }
 
 }

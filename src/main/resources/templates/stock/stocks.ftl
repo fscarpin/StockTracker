@@ -59,6 +59,6 @@
 </#if>
 
 <#--Show the list of stocks the user is currently following -->
-
+<#include "_list.ftl"/>
 
 </@u.page>
