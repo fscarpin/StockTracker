@@ -5,7 +5,7 @@
     </div>
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li><a href="/">My Portfolio</a></li>
+        <li><a href="/">My Portfolio <span class="badge"> ${userStocks?size} </span> </a></li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
             Posts <span class="caret"></span>
@@ -31,7 +31,7 @@
 
           <li>
             <form class="button_to" action="/logout">
-              <input class="btn btn-sm btn-danger navbar-btn" type="submit" value="Log out"/>
+              <input class="btn btn-sm btn-primary navbar-btn" type="submit" value="Log out"/>
             </form>
           </li>
         <#else>

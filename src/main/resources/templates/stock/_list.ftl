@@ -23,7 +23,7 @@
         <#if account??>
           <td>
             <a data-confirm="Are you sure you want to remove ${userStock.name} from your portfolio?"
-               class="btn btn-danger btn-sm" rel="nofollow" data-method="post" href="/deleteStock?stockId=${userStock.id}">
+               class="btn btn-danger btn-sm" rel="nofollow" data-method="delete" href="/deleteStock?stockId=${userStock.id}">
               Delete
             </a>
           </td>
