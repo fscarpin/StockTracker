@@ -73,6 +73,11 @@ public class StockFetcher {
       return null;
     }
 
+    // Stock was not found
+    if (name.equals("N/A") && currency.equals("N/A") && price == 0) {
+      return null;
+    }
+
     return new YahooStock(sym, price, volume, pe, eps, week52low, week52high, daylow, dayhigh, movingav50day, marketcap, name,currency, shortRatio,previousClose,open,exchange);
 
   }

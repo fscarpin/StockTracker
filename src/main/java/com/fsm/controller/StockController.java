@@ -25,18 +25,30 @@ public class StockController {
   @RequestMapping("/")
   public String myStocks() {
 
+    // Go to the stocks page
     return "stocks";
   }
 
   @RequestMapping("/findStock")
-  public String findStock(@RequestParam("stockSymbol") String stockSymbol, Model model) {
+  public String findStock(@RequestParam("stockSymbol") String stockSymbol, Model model, HttpServletRequest req) {
 
+    // Get the stock from Yahoo
     YahooStock yahooYahooStock = StockFetcher.getStock(stockSymbol);
-    if (yahooYahooStock != null)
-      model.addAttribute("stock", yahooYahooStock);
-    else
-      model.addAttribute("error", "Could not find stock " + stockSymbol);
 
+    // If the stock was found, let' show it, so the user can add it
+    if (yahooYahooStock != null) {
+      model.addAttribute("stock", yahooYahooStock);
+
+      // Check if the stock was already added. If so, it' not possible to add it again
+      if (stockService.stockAlreadyAdded(stockSymbol, AccountUtil.getUserAccount(req))) {
+        model.addAttribute("stock_already_added", "You already added this stock");
+      }
+    } else {
+      // Stock was not found
+      model.addAttribute("error", "Could not find stock " + stockSymbol);
+    }
+
+    // Go to stocks page
     return "stocks";
   }
 
@@ -45,13 +57,17 @@ public class StockController {
 
     Account account = AccountUtil.getUserAccount(req);
 
+    // Show an error if the stock was already added
     if (stockService.stockAlreadyAdded(stockSymbol, account)) {
       model.addAttribute("error", "You already added this stock");
-    } else {
+    }
+    // Add the stock and show a successfull message
+    else {
       stockService.addStock(stockSymbol, account);
       model.addAttribute("success", "Stock " + stockSymbol + " has been successfully added");
     }
 
+    // Go to stocks page
     return "stocks";
   }
 

@@ -30,14 +30,20 @@
 
 <div class="well well-lg">
   <strong> Symbol: </strong> ${stock.symbol}
-  <strong> Name: </strong> ${stock.name} %>
-  <strong> Currency: </strong> ${stock.currency} %>
-  <strong> Price: </strong> ${stock.price} %>
+  <strong> Name: </strong> ${stock.name}
+  <strong> Currency: </strong> ${stock.currency}
+  <strong> Price: </strong> ${stock.price}
 
-  <form name="stock" action="addStock" method="get">
-    <input type="hidden" name="stockSymbol" value= ${stock.symbol}>
-    <input type="submit" value="Add Stock" class="btn btn-success">
-  </form>
+  <#if stock_already_added??>
+    <p class="medium-margin-top">
+      <h4><span class="label label-danger"> You already added this stock </span></h4>
+    </p>
+  <#else >
+    <form name="stock" action="addStock" method="get">
+      <input type="hidden" name="stockSymbol" value= ${stock.symbol}>
+      <input type="submit" value="Add Stock" class="btn btn-success medium-margin-top">
+    </form>
+  </#if>
 </div>
 </#if>
 
