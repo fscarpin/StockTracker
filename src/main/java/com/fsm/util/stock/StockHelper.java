@@ -1,4 +1,4 @@
-package com.fsm.util;
+package com.fsm.util.stock;
 
 import java.util.regex.Pattern;
 

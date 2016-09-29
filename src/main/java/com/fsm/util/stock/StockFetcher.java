@@ -1,4 +1,4 @@
-package com.fsm.util;
+package com.fsm.util.stock;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -11,12 +11,12 @@ import java.util.logging.Logger;
 public class StockFetcher {
 
   /*
-  * Returns a Stock Object that contains info about a specified stock.
+  * Returns a YahooStock Object that contains info about a specified stock.
   * @param 	symbol the company's stock symbol
   * @return 	a stock object containing info about the company's stock
-  * @see Stock
+  * @see YahooStock
   */
-  public static Stock getStock(String symbol) {
+  public static YahooStock getStock(String symbol) {
     String sym = symbol.toUpperCase();
     double price = 0.0;
     int volume = 0;
@@ -73,7 +73,7 @@ public class StockFetcher {
       return null;
     }
 
-    return new Stock(sym, price, volume, pe, eps, week52low, week52high, daylow, dayhigh, movingav50day, marketcap, name,currency, shortRatio,previousClose,open,exchange);
+    return new YahooStock(sym, price, volume, pe, eps, week52low, week52high, daylow, dayhigh, movingav50day, marketcap, name,currency, shortRatio,previousClose,open,exchange);
 
   }
 }

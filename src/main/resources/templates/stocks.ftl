@@ -5,11 +5,12 @@
 <div id="stock-lookup">
   <h3> Search for stocks </h3>
 
+  <#-- Form to find a stock by the symbol -->
   <form name="stock" action="findStock" method="get">
     <div class="form-group">
       <div class='row'>
         <div class='col-xs-9'>
-          <input type="text" name="stock" id="stock" placeholder="Stock ticker symbol" autofocus="autofocus"
+          <input type="text" name="stockSymbol" placeholder="Stock ticker symbol" autofocus="autofocus"
                  class="form-control search-box input-lg" />
         </div>
         <div class='col-xs-3'>
@@ -24,8 +25,20 @@
   </form>
 </div>
 
+<#-- Shows some stock information if it was found, and allow the user to add it -->
 <#if stock??>
-  Here' your stock: ${stock.name} ${stock.symbol} ${stock.price}
+
+<div class="well well-lg">
+  <strong> Symbol: </strong> ${stock.symbol}
+  <strong> Name: </strong> ${stock.name} %>
+  <strong> Currency: </strong> ${stock.currency} %>
+  <strong> Price: </strong> ${stock.price} %>
+
+  <form name="stock" action="addStock" method="get">
+    <input type="hidden" name="stockSymbol" value= ${stock.symbol}>
+    <input type="submit" value="Add Stock" class="btn btn-success">
+  </form>
+</div>
 </#if>
 
 </@u.page>

@@ -1,9 +1,11 @@
 package com.fsm.repository;
 
-import com.fsm.domain.MyStock;
+import com.fsm.domain.Stock;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
-public interface StockRepository extends CrudRepository<MyStock, Long> {
+@Repository
+public interface StockRepository extends CrudRepository<Stock, Long> {
 
-
+  Stock findFirstByTickerAndUserEmail(String ticker, String userEmail);
 }
