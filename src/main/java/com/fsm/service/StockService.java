@@ -8,6 +8,8 @@ import com.stormpath.sdk.account.Account;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class StockService {
 
@@ -50,5 +52,23 @@ public class StockService {
 
   public void deleteStock(String id) {
     stockRepository.delete(Long.parseLong(id));
+  }
+
+  public List<Stock> getAllStocks(Account account) {
+    // Get all stocks from the database
+    List<Stock> stocks = stockRepository.findAllByUserEmailOrderByName(account.getEmail());
+
+    // Update the prices and save the stock
+    for (Stock stock: stocks) {
+      // Get the values from Yahoo
+      String symbol = stock.getTicker();
+      YahooStock yahooStock = StockFetcher.getStock(symbol);
+
+      // Update the price
+      stock.setLastPrice(yahooStock.getPrice());
+      stockRepository.save(stock);
+    }
+
+    return stocks;
   }
 }

@@ -2,7 +2,7 @@ package com.fsm.controller.advice;
 
 import com.fsm.controller.StockController;
 import com.fsm.domain.Stock;
-import com.fsm.repository.StockRepository;
+import com.fsm.service.StockService;
 import com.fsm.util.AccountUtil;
 import com.stormpath.sdk.account.Account;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
@@ -15,23 +15,20 @@ import java.util.List;
 @ControllerAdvice(basePackageClasses = StockController.class)
 public class StockControllerAdvice {
 
-  private StockRepository stockRepository;
+  private StockService stockService;
 
   @Autowired
-  public StockControllerAdvice(StockRepository stockRepository) {
-    this.stockRepository = stockRepository;
+  public StockControllerAdvice(StockService stockService) {
+    this.stockService = stockService;
   }
 
   /**
-   * Return all the stocks for the current user
+   * Return all stocks for the current user
    * @return List of Stock
    */
   @ModelAttribute("userStocks")
   public List<Stock> getAllUserStocks(HttpServletRequest req) {
     Account account = AccountUtil.getUserAccount(req);
-
-    // Update the stocks based on the current value
-
-    return stockRepository.findAllByUserEmail(account.getEmail());
+    return stockService.getAllStocks(account);
   }
 }

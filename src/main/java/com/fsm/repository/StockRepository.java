@@ -10,5 +10,5 @@ import java.util.List;
 public interface StockRepository extends CrudRepository<Stock, Long> {
 
   Stock findFirstByTickerAndUserEmailAllIgnoreCase(String ticker, String userEmail);
-  List<Stock> findAllByUserEmail(String userEmail);
+  List<Stock> findAllByUserEmailOrderByName(String userEmail);
 }
