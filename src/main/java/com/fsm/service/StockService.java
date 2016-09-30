@@ -21,14 +21,16 @@ public class StockService {
   }
 
   public boolean addStock(String stockSymbol, Account account) {
-    YahooStock yahooYahooStock = StockFetcher.getStock(stockSymbol);
-    if (yahooYahooStock == null)
+    YahooStock yahooStock = StockFetcher.getStock(stockSymbol);
+    if (yahooStock == null)
       return false;
 
     Stock stock = new Stock();
-    stock.setName(yahooYahooStock.getName());
+    stock.setName(yahooStock.getName());
     stock.setTicker(stockSymbol);
-    stock.setLastPrice(yahooYahooStock.getPrice());
+    stock.setLastPrice(yahooStock.getPrice());
+    stock.setYesterdayClosePrice(yahooStock.getPreviousClose());
+    stock.setCurrency(yahooStock.getCurrency());
     stock.setUserEmail(account.getEmail());
 
     Stock savedStock = stockRepository.save(stock);
@@ -72,6 +74,7 @@ public class StockService {
 
       // Update the price
       stock.setLastPrice(yahooStock.getPrice());
+      stock.setYesterdayClosePrice(yahooStock.getPreviousClose());
       stockRepository.save(stock);
     }
 

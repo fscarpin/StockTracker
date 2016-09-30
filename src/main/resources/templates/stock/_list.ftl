@@ -11,9 +11,12 @@
 
     <thead>
       <tr>
-        <th>Name</th>
-        <th>Symbol</th>
-        <th>Current Price</th>
+        <th> Name </th>
+        <th> Symbol </th>
+        <th> Currency </th>
+        <th> Previous Closed Price </th>
+        <th> Current Price </th>
+        <th> Percentage </th>
 
         <#-- Only show the actions if the user is connected -->
         <#if account??>
@@ -27,7 +30,10 @@
         <tr>
           <td> ${userStock.name} </td>
           <td> ${userStock.ticker} </td>
+          <td> ${userStock.currency} </td>
+          <td> ${userStock.yesterdayClosePrice} </td>
           <td> ${userStock.lastPrice} </td>
+          <th> ${userStock.percentage} </th>
 
           <#if account??>
             <td>

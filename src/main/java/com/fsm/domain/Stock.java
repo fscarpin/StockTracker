@@ -4,6 +4,7 @@ import com.stormpath.sdk.account.Account;
 import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
+import java.text.DecimalFormat;
 import java.util.Date;
 
 @Entity
@@ -17,15 +18,16 @@ public class Stock {
   private String name;
   private String ticker;
   private Double lastPrice;
+  private Double yesterdayClosePrice;
+  private String currency;
   private String userEmail;
+
+  @Transient
+  private Double percentage;
 
   @CreatedDate
   @Column(columnDefinition = "TIMESTAMP")
   private Date createdAt;
-  // Account comes from Stormpath (login manager) so it's not persisted in my database. How should I define this relation?
-//  @ManyToOne
-//  private Account account;
-
 
   public Long getId() {
     return id;
@@ -74,14 +76,40 @@ public class Stock {
   public void setCreatedAt(Date createdAt) {
     this.createdAt = createdAt;
   }
+
+  public Double getYesterdayClosePrice() {
+    return yesterdayClosePrice;
+  }
+
+  public void setYesterdayClosePrice(Double yesterdayClosePrice) {
+    this.yesterdayClosePrice = yesterdayClosePrice;
+  }
+
+  public String getCurrency() {
+    return currency;
+  }
+
+  public void setCurrency(String currency) {
+    this.currency = currency;
+  }
+
+  public String getPercentage() {
+    double current = getLastPrice();
+    double previousClose = getYesterdayClosePrice();
+
+    double diff = current - previousClose;
+
+    if (current == 0)
+      return "---";
+    else {
+      double result = diff * 100 / current;
+
+      DecimalFormat df = new DecimalFormat("##.##");
+
+      if (result > 0)
+        return "+ " + df.format(result) + " %";
+      else
+        return "- " + df.format(Math.abs(result)) + " %";
+    }
+  }
 }
-
-
-
-//  create_table "stocks", force: :cascade do |t|
-//          t.string   "ticker"
-//          t.string   "name"
-//          t.decimal  "last_price"
-//          t.datetime "created_at", null: false
-//          t.datetime "updated_at", null: false
-//          end
