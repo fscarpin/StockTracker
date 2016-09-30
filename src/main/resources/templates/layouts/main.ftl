@@ -37,7 +37,7 @@
   <#nested>
 
   <footer class="footer-margin">
-    <p> Developed by me </p>
+    <p> Developed by me <small> (Rates provided by Yahoo! Finance) </small> </p>
   </footer>
 
 </div>

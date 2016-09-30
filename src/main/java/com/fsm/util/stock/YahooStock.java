@@ -116,7 +116,7 @@ public class YahooStock {
     double diff = current - previousClose;
 
     if (current == 0)
-      return Double.NaN;
+      return 0;
     else
       return diff * 100 / current;
   }

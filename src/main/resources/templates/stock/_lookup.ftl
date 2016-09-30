@@ -43,7 +43,7 @@
 
   <#if stock_already_added??>
     <p>
-    <h4><span class="label label-danger"> You already added this stock </span></h4>
+      <h4><span class="label label-danger"> You already added this stock </span></h4>
     </p>
   <#else >
     <form name="stock" action="addStock" method="get">
