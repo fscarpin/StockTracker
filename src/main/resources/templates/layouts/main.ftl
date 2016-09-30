@@ -36,8 +36,8 @@
   <#-- This processes the enclosed content:  -->
   <#nested>
 
-  <footer>
-    <p> Copyright FSM IT </p>
+  <footer class="footer-margin">
+    <p> Developed by me </p>
   </footer>
 
 </div>

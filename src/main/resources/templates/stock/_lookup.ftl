@@ -48,7 +48,9 @@
   <#else >
     <form name="stock" action="addStock" method="get">
       <input type="hidden" name="stockSymbol" value= ${stock.symbol}>
-      <input type="submit" value="Add Stock" class="btn btn-success">
+      <div class="medium-margin-top">
+        <input type="submit" value="Add Stock" class="btn btn-success">
+      </div>
     </form>
   </#if>
 </div>

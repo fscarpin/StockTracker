@@ -22,8 +22,8 @@
   padding-right: 1em !important;
 }
 
-.large-padding-bottom {
-  padding-bottom: 9em !important;
+.medium-padding-bottom {
+  padding-bottom: 1em !important;
 }
 
 .no-padding-right {
@@ -42,4 +42,12 @@
 
 .loss {
   color: red;
+}
+
+.footer-margin {
+  margin-top:     30px;
+  margin-bottom:  30px;
+  padding:        10px;
+  border-top:     1px solid #e6e6e6;
+  color:          #347ab7;
 }
