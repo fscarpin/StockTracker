@@ -1,35 +1,46 @@
-<table class="table table-striped">
+<#-- Shows a message if the user is not tracking any stock -->
+<#if userStocks?size <= 0 >
 
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Symbol</th>
-      <th>Current Price</th>
+  <div class="alert alert-info" role="alert">
+    You are not tracking any stock. Add some now!
+  </div>
 
-      <#-- Only show the actions if the user is connected -->
-      <#if account??>
-        <th>Actions</th>
-      </#if>
-    </tr>
-  </thead>
+<#else >
+<#-- Show the users'stock(s) -->
+  <table class="table table-striped">
 
-  <tbody>
-    <#list userStocks as userStock>
+    <thead>
       <tr>
-        <td> ${userStock.name} </td>
-        <td> ${userStock.ticker} </td>
-        <td> ${userStock.lastPrice} </td>
+        <th>Name</th>
+        <th>Symbol</th>
+        <th>Current Price</th>
 
+        <#-- Only show the actions if the user is connected -->
         <#if account??>
-          <td>
-            <a data-confirm="Are you sure you want to remove ${userStock.name} from your portfolio?"
-               class="btn btn-danger btn-sm" rel="nofollow" data-method="delete" href="/deleteStock?stockId=${userStock.id}">
-              Delete
-            </a>
-          </td>
+          <th>Actions</th>
         </#if>
       </tr>
-    </#list>
-  </tbody>
+    </thead>
 
-</table>
+    <tbody>
+      <#list userStocks as userStock>
+        <tr>
+          <td> ${userStock.name} </td>
+          <td> ${userStock.ticker} </td>
+          <td> ${userStock.lastPrice} </td>
+
+          <#if account??>
+            <td>
+              <a data-confirm="Are you sure you want to remove ${userStock.name} from your portfolio?"
+                 class="btn btn-danger btn-sm" rel="nofollow" data-method="delete" href="/deleteStock?stockId=${userStock.id}">
+                Delete
+              </a>
+            </td>
+          </#if>
+        </tr>
+      </#list>
+    </tbody>
+
+  </table>
+
+</#if>

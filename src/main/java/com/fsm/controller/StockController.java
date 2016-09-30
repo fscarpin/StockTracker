@@ -68,8 +68,10 @@ public class StockController {
     }
     // Add the stock and show a successfull message
     else {
-      stockService.addStock(stockSymbol, account);
-      model.addAttribute("success", "Stock " + stockSymbol + " has been successfully added");
+      if (stockService.addStock(stockSymbol, account))
+        model.addAttribute("success", "Stock " + stockSymbol + " has been successfully added");
+      else
+        model.addAttribute("error", "Error adding stock " + stockSymbol);
     }
 
     // Redirect to the main page

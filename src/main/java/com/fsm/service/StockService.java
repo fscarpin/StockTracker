@@ -20,8 +20,10 @@ public class StockService {
     this.stockRepository = stockRepository;
   }
 
-  public void addStock(String stockSymbol, Account account) {
+  public boolean addStock(String stockSymbol, Account account) {
     YahooStock yahooYahooStock = StockFetcher.getStock(stockSymbol);
+    if (yahooYahooStock == null)
+      return false;
 
     Stock stock = new Stock();
     stock.setName(yahooYahooStock.getName());
@@ -29,7 +31,11 @@ public class StockService {
     stock.setLastPrice(yahooYahooStock.getPrice());
     stock.setUserEmail(account.getEmail());
 
-    stockRepository.save(stock);
+    Stock savedStock = stockRepository.save(stock);
+    if (savedStock == null)
+      return false;
+
+    return true;
   }
 
   public boolean stockAlreadyAdded(String stockSymbol, Account account) {
