@@ -7,8 +7,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Stock Tracker </title>
 
+  <#-- Bootstrap and a custom CSS -->
   <link rel="stylesheet" href="/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css" />
-  <link rel="stylesheet" href="../../static/css/stock_tracker.css" />
+  <link rel="stylesheet" href="css/stock_tracker.css" />
+
+  <#-- JQuery support -->
+  <script src="https://code.jquery.com/jquery-1.11.2.js"></script>
+  <script src="https://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+
+  <#-- User defined JS -->
+  <script type="text/javascript" src="javascript/confirmJs.js"></script>
 
   <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css' />
   <link href='https://fonts.googleapis.com/css?family=Exo' rel='stylesheet' type='text/css' />

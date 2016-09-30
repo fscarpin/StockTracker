@@ -33,12 +33,18 @@
           <td> ${userStock.currency} </td>
           <td> ${userStock.yesterdayClosePrice} </td>
           <td> ${userStock.lastPrice} </td>
-          <th> ${userStock.percentage} </th>
+          <th>
+            <#if userStock.percentage gte 0 >
+              <span class="profit"> ${userStock.percentageString} </span>
+            <#else >
+              <span class="loss"> ${userStock.percentageString} </span>
+            </#if>
+          </th>
 
           <#if account??>
             <td>
-              <a data-confirm="Are you sure you want to remove ${userStock.name} from your portfolio?"
-                 class="btn btn-danger btn-sm" rel="nofollow" data-method="delete" href="/deleteStock?stockId=${userStock.id}">
+              <a href="/deleteStock?stockId=${userStock.id}" class="btn btn-danger btn-sm" id="Delete" rel="nofollow"
+                 data-method="delete">
                 Delete
               </a>
             </td>

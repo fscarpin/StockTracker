@@ -93,7 +93,7 @@ public class Stock {
     this.currency = currency;
   }
 
-  public String getPercentage() {
+  public String getPercentageString() {
     double current = getLastPrice();
     double previousClose = getYesterdayClosePrice();
 
@@ -104,12 +104,25 @@ public class Stock {
     else {
       double result = diff * 100 / current;
 
-      DecimalFormat df = new DecimalFormat("##.##");
+      DecimalFormat df = new DecimalFormat("##.###");
 
       if (result > 0)
         return "+ " + df.format(result) + " %";
       else
         return "- " + df.format(Math.abs(result)) + " %";
+    }
+  }
+
+  public double getPercentage() {
+    double current = getLastPrice();
+    double previousClose = getYesterdayClosePrice();
+
+    double diff = current - previousClose;
+
+    if (current == 0)
+      return Double.NaN;
+    else {
+      return diff * 100 / current;
     }
   }
 }
